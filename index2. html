@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children Support Group — Resources</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-blue: #4F46E5;
+      --bg-light: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0F172A;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 860px;
+      aspect-ratio: 9 / 19.5;
+      background: var(--bg-light);
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 6px solid #1E293B;
+      outline: 2px solid #334155;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 0; background-color: var(--bg-light); }
+      .app-viewport {
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .status-bar {
+      padding: 0.8rem 1.5rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .app-header {
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-header h2 { font-size: 1.1rem; font-weight: 700; }
+
+    .content-area {
+      flex: 1;
+      padding-bottom: 70px;
+      overflow-y: auto;
+    }
+
+    .pills-bar {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      overflow-x: auto;
+    }
+
+    .pill {
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      background: #E2E8F0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .pill.active { background: var(--primary-blue); color: #FFF; }
+
+    .resource-item {
+      background: #FFF;
+      margin: 0.4rem 1.2rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      cursor: pointer;
+    }
+
+    .resource-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #FFF;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-item.active { color: var(--primary-blue); font-weight: 700; }
+    .nav-item i { font-size: 1.05rem; margin-bottom: 0.15rem; }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div>
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <div class="app-header">
+      <a href="index.html" style="color: inherit;"><i class="fa-solid fa-arrow-left"></i></a>
+      <h2>Resources</h2>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <div class="content-area">
+      <div class="pills-bar">
+        <div class="pill active">All</div>
+        <div class="pill">Mental Health</div>
+        <div class="pill">Education</div>
+        <div class="pill">Safety</div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon" style="background: #FCE7F3; color: #EC4899;"><i class="fa-solid fa-face-smile"></i></div>
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.85rem; font-weight: 700;">Understanding Emotions</h4>
+          <p style="font-size: 0.72rem; color: var(--text-muted);">A simple guide for children and parents.</p>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon" style="background: #D1FAE5; color: #10B981;"><i class="fa-solid fa-book-open-reader"></i></div>
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.85rem; font-weight: 700;">Study & Learning Tips</h4>
+          <p style="font-size: 0.72rem; color: var(--text-muted);">Build good habits and stay focused.</p>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon" style="background: #DBEAFE; color: #2563EB;"><i class="fa-solid fa-shield-halved"></i></div>
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.85rem; font-weight: 700;">Child Safety Online</h4>
+          <p style="font-size: 0.72rem; color: var(--text-muted);">Keep your child safe at home, school, and online.</p>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon" style="background: #FEF3C7; color: #D97706;"><i class="fa-solid fa-apple-whole"></i></div>
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.85rem; font-weight: 700;">Healthy Habits</h4>
+          <p style="font-size: 0.72rem; color: var(--text-muted);">Nutrition, sleep, and exercise advice.</p>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon" style="background: #F3E8FF; color: #9333EA;"><i class="fa-solid fa-users"></i></div>
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.85rem; font-weight: 700;">Parenting Support</h4>
+          <p style="font-size: 0.72rem; color: var(--text-muted);">Guidance for every stage of development.</p>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="community.html#chat" class="nav-item">
+        <i class="fa-solid fa-comments"></i>
+        <span>Chat</span>
+      </a>
+      <a href="resources.html" class="nav-item active">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Resources</span>
+      </a>
+      <a href="community.html#events" class="nav-item">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Events</span>
+      </a>
+      <a href="community.html#profile" class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
