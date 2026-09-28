@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children Support Group — Community</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-blue: #4F46E5;
+      --bg-light: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --green: #10B981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0F172A;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 860px;
+      aspect-ratio: 9 / 19.5;
+      background: var(--bg-light);
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 6px solid #1E293B;
+      outline: 2px solid #334155;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 0; background-color: var(--bg-light); }
+      .app-viewport {
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .status-bar {
+      padding: 0.8rem 1.5rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .app-header {
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-header h2 { font-size: 1.1rem; font-weight: 700; }
+
+    .content-section {
+      display: none;
+      flex: 1;
+      padding-bottom: 70px;
+      overflow-y: auto;
+    }
+
+    .content-section.active { display: block; }
+
+    /* CHAT STYLES */
+    .pinned-msg {
+      background: #EEF2FF;
+      border-left: 4px solid var(--primary-blue);
+      padding: 0.75rem 0.9rem;
+      margin: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      color: #3730A3;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-body { padding: 0.8rem 1.2rem; display: flex; flex-direction: column; gap: 0.9rem; }
+    .chat-bubble {
+      background: #FFF;
+      padding: 0.75rem 0.9rem;
+      border-radius: 14px;
+      font-size: 0.82rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      max-width: 88%;
+    }
+    .chat-author { font-weight: 700; font-size: 0.75rem; color: var(--primary-blue); margin-bottom: 0.2rem; }
+    .chat-time { font-size: 0.65rem; color: var(--text-muted); text-align: right; margin-top: 0.3rem; }
+
+    /* EVENT STYLES */
+    .event-card {
+      background: #FFF;
+      margin: 0.45rem 1.2rem;
+      padding: 0.85rem 1rem;
+      border-radius: 16px;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .event-img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; }
+    .event-info h4 { font-size: 0.85rem; font-weight: 700; }
+    .event-info p { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; }
+    
+    .badge-free {
+      position: absolute;
+      right: 1rem;
+      bottom: 0.8rem;
+      background: #EEF2FF;
+      color: var(--primary-blue);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    /* PROFILE & ADMIN STYLES */
+    .menu-list { padding: 0 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .menu-item-row {
+      background: #FFF;
+      padding: 0.8rem 0.9rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .admin-form { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.2rem; }
+    .admin-form input { padding: 0.6rem 0.8rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.8rem; }
+    
+    .btn {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 20px;
+      border: none;
+      background: var(--primary-blue);
+      color: #FFF;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #FFF;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-item.active { color: var(--primary-blue); font-weight: 700; }
+    .nav-item i { font-size: 1.05rem; margin-bottom: 0.15rem; }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div>
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <!-- CHAT SECTION -->
+    <div id="chat" class="content-section">
+      <div class="app-header">
+        <a href="index.html" style="color: inherit;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2>Discussions</h2>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+      <div class="pinned-msg">
+        <i class="fa-solid fa-thumbtack"></i>
+        <div><strong>Pinned message</strong><br>Keep this group safe, respectful, and positive for everyone. 💙</div>
+      </div>
+      <div class="chat-body">
+        <div class="chat-bubble">
+          <div class="chat-author">Aisha (Parent)</div>
+          My child has been feeling anxious at school lately. Any advice?
+          <div class="chat-time">10:24</div>
+        </div>
+        <div class="chat-bubble">
+          <div class="chat-author">Daniel (Mentor)</div>
+          You're not alone! Here are a few strategies that helped us through it.
+          <div class="chat-time">10:32</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTS SECTION -->
+    <div id="events" class="content-section">
+      <div class="app-header">
+        <a href="index.html" style="color: inherit;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2>Upcoming Events</h2>
+        <i class="fa-solid fa-plus" onclick="switchTab('admin')"></i>
+      </div>
+      <div id="eventsListContainer"></div>
+    </div>
+
+    <!-- COMMUNITY STATS -->
+    <div id="stats" class="content-section">
+      <div class="app-header">
+        <a href="index.html" style="color: inherit;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2>Community Info</h2>
+      </div>
+      <div style="text-align: center; padding: 2rem 1.2rem;">
+        <i class="fa-solid fa-users-viewfinder" style="font-size: 3rem; color: var(--primary-blue);"></i>
+        <h3 style="margin-top: 0.8rem;">246 Active Members</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Connecting families, mentors, and caregivers across the globe.</p>
+      </div>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <div id="profile" class="content-section">
+      <div class="app-header">
+        <a href="index.html" style="color: inherit;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2>Profile</h2>
+      </div>
+      <div class="menu-list" style="margin-top: 1rem;">
+        <div class="menu-item-row" onclick="switchTab('admin')">
+          <span><i class="fa-solid fa-user-shield" style="color: var(--green);"></i> Admin Control Panel</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        <div class="menu-item-row">
+          <span><i class="fa-solid fa-gear" style="color: var(--primary-blue);"></i> Settings</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL SECTION -->
+    <div id="admin" class="content-section" style="padding: 1rem 1.2rem; background: #FFF;">
+      <div class="app-header" style="padding: 0 0 0.8rem 0; border: none;">
+        <i class="fa-solid fa-arrow-left" onclick="switchTab('events')"></i>
+        <h2>Admin Event Control</h2>
+      </div>
+      <form class="admin-form" onsubmit="handleCreateEvent(event)">
+        <input type="text" id="admTitle" placeholder="Event Title" required />
+        <input type="text" id="admDate" placeholder="Date & Time" required />
+        <input type="text" id="admLocation" placeholder="Location" required />
+        <button type="submit" class="btn">Publish Event</button>
+      </form>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="javascript:void(0)" onclick="switchTab('chat')" class="nav-item" id="nav-chat">
+        <i class="fa-solid fa-comments"></i>
+        <span>Chat</span>
+      </a>
+      <a href="resources.html" class="nav-item">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Resources</span>
+      </a>
+      <a href="javascript:void(0)" onclick="switchTab('events')" class="nav-item" id="nav-events">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Events</span>
+      </a>
+      <a href="javascript:void(0)" onclick="switchTab('profile')" class="nav-item" id="nav-profile">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const eventsList = [
+      { title: "Mental Health Workshop", date: "Sat, 28 Jun • 10:00 AM", location: "Online", img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=200&q=80" },
+      { title: "Art & Creativity Day", date: "Tue, 15 Jul • 2:00 PM", location: "Community Center", img: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=200&q=80" }
+    ];
+
+    function switchTab(sectionId) {
+      document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      
+      const target = document.getElementById(sectionId);
+      if (target) target.classList.add('active');
+      
+      const activeNav = document.getElementById('nav-' + sectionId);
+      if (activeNav) activeNav.classList.add('active');
+      
+      window.location.hash = sectionId;
+    }
+
+    function renderEvents() {
+      const container = document.getElementById('eventsListContainer');
+      container.innerHTML = '';
+      eventsList.forEach(evt => {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.innerHTML = `
+          <img src="${evt.img}" class="event-img">
+          <div class="event-info">
+            <h4>${evt.title}</h4>
+            <p><i class="fa-regular fa-calendar"></i> ${evt.date}</p>
+            <p><i class="fa-solid fa-location-dot"></i> ${evt.location}</p>
+          </div>
+          <span class="badge-free">Free</span>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function handleCreateEvent(e) {
+      e.preventDefault();
+      eventsList.push({
+        title: document.getElementById('admTitle').value,
+        date: document.getElementById('admDate').value,
+        location: document.getElementById('admLocation').value,
+        img: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=200&q=80'
+      });
+      renderEvents();
+      switchTab('events');
+    }
+
+    window.onload = function() {
+      const hash = window.location.hash.replace('#', '') || 'chat';
+      switchTab(hash);
+      renderEvents();
+    };
+  </script>
+</body>
+</html>
