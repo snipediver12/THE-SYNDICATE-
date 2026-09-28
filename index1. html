@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children Support Group — Home</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-blue: #4F46E5;
+      --bg-light: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --green: #10B981;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0F172A;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 860px;
+      aspect-ratio: 9 / 19.5;
+      background: var(--bg-light);
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 6px solid #1E293B;
+      outline: 2px solid #334155;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 0; background-color: var(--bg-light); }
+      .app-viewport {
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .status-bar {
+      padding: 0.8rem 1.5rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 10;
+    }
+
+    .content-area {
+      flex: 1;
+      padding-bottom: 70px;
+      overflow-y: auto;
+    }
+
+    .welcome-section {
+      background: linear-gradient(180deg, #A5B4FC 0%, #C7D2FE 45%, #FEF3C7 100%);
+      text-align: center;
+      padding: 1.5rem 1.5rem 2rem;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .brand-logo {
+      width: 75px;
+      height: 75px;
+      background: #FFF;
+      border-radius: 50%;
+      margin: 0.5rem auto 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-logo i { font-size: 2.2rem; color: #EF4444; }
+
+    .welcome-section h1 { font-size: 1.5rem; font-weight: 800; color: #1E1B4B; }
+    .tagline { color: #D97706; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .welcome-section p { font-size: 0.85rem; color: #374151; font-weight: 500; }
+
+    .home-header { padding: 1rem 1.2rem 0.4rem; }
+    .greeting h3 { font-size: 1.2rem; font-weight: 800; }
+    .greeting p { font-size: 0.78rem; color: var(--text-muted); }
+
+    .search-box {
+      margin: 0.8rem 1.2rem;
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .search-box input { border: none; outline: none; width: 100%; font-size: 0.8rem; }
+
+    .grid-menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      padding: 0 1.2rem;
+    }
+
+    .menu-card {
+      padding: 1rem;
+      border-radius: 16px;
+      color: #FFF;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .menu-card:active { transform: scale(0.98); }
+    .menu-card i { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .menu-card h4 { font-size: 0.88rem; font-weight: 700; }
+    .menu-card p { font-size: 0.68rem; opacity: 0.9; margin-top: 0.2rem; }
+
+    .card-purple { background: #6366F1; }
+    .card-green { background: #10B981; }
+    .card-amber { background: #F59E0B; }
+    .card-pink { background: #EC4899; }
+
+    .banner-card {
+      margin: 1rem 1.2rem;
+      background: #FEF3C7;
+      border-radius: 16px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .banner-card h3 { color: #92400E; font-size: 1rem; font-weight: 800; }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #FFF;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-item.active { color: var(--primary-blue); font-weight: 700; }
+    .nav-item i { font-size: 1.05rem; margin-bottom: 0.15rem; }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div>
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <div class="welcome-section">
+        <div class="brand-logo"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h1>Children Support Group</h1>
+        <div class="tagline">Safe Hearts • Bright Futures</div>
+        <p>A supportive community for children, parents, and caregivers.</p>
+      </div>
+
+      <div class="home-header">
+        <div class="greeting">
+          <h3>Hello, Friend 👋</h3>
+          <p>Together we support, encourage, and empower.</p>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+        <input type="text" placeholder="Search topics or resources..." />
+      </div>
+
+      <div class="grid-menu">
+        <a href="community.html#chat" class="menu-card card-purple">
+          <i class="fa-solid fa-comments"></i>
+          <h4>Discussions</h4>
+          <p>Share & get support</p>
+        </a>
+        <a href="resources.html" class="menu-card card-green">
+          <i class="fa-solid fa-book-open"></i>
+          <h4>Resources</h4>
+          <p>Guides, tips & learning</p>
+        </a>
+        <a href="community.html#events" class="menu-card card-amber">
+          <i class="fa-solid fa-calendar-days"></i>
+          <h4>Upcoming Events</h4>
+          <p>Workshops & activities</p>
+        </a>
+        <a href="community.html#stats" class="menu-card card-pink">
+          <i class="fa-solid fa-user-group"></i>
+          <h4>Community</h4>
+          <p>Connect with members</p>
+        </a>
+      </div>
+
+      <div class="banner-card">
+        <div>
+          <h3>Every child matters 💙</h3>
+        </div>
+        <i class="fa-solid fa-child-reaching" style="font-size: 2rem; color: #D97706;"></i>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="community.html#chat" class="nav-item">
+        <i class="fa-solid fa-comments"></i>
+        <span>Chat</span>
+      </a>
+      <a href="resources.html" class="nav-item">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Resources</span>
+      </a>
+      <a href="community.html#events" class="nav-item">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Events</span>
+      </a>
+      <a href="community.html#profile" class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
