@@ -42,7 +42,7 @@
       padding: 1rem;
     }
 
-    /* RESPONSIVE MOBILE VIEWPORT SIMULATOR */
+   
     .app-viewport {
       width: 100%;
       max-width: 420px;
